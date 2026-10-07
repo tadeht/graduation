@@ -9446,9 +9446,7 @@ body.mode-phone-frame.phone-landscape .wish-card-item {
   .desk-detail-modal-card,
   #modal-desk-detail .modal-card,
   .wishes-modal-card,
-  #modal-all-wishes .modal-card,
-  .rsvp-modal-card,
-  #modal-rsvp-popup .modal-card {
+  #modal-all-wishes .modal-card {
     max-width: min(720px, 96vw) !important;
     max-height: calc(100dvh - 12px) !important;
     margin: auto !important;
@@ -9586,5 +9584,181 @@ body:has(.rsvp-modal-overlay.active) .desk-explorer-hint-msg {
   .desk-explorer-hint-msg {
     top: 40px;
     font-size: 11px;
+  }
+}
+
+/* =============================================================================
+   TOI UU HOA CARD RSVP (BAN CO THAM GIA KHONG?): GON GANG, VUA VAN MOI MAN HINH
+   ============================================================================= */
+.rsvp-modal-card,
+#modal-rsvp-popup .modal-card {
+  width: 100% !important;
+  max-width: min(440px, 92vw) !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  border: 1.5px solid rgba(229, 169, 60, 0.45) !important;
+  border-radius: 22px !important;
+  padding: 20px 20px 18px !important;
+  text-align: center !important;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(229, 169, 60, 0.25) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  max-height: calc(100dvh - 16px) !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+}
+
+.rsvp-modal-card .modal-cap-icon {
+  font-size: 32px !important;
+  line-height: 1 !important;
+  margin-bottom: -4px !important;
+}
+
+.rsvp-modal-card .modal-title {
+  font-size: 1.32rem !important;
+  font-weight: 700 !important;
+  color: var(--primary-navy) !important;
+  margin: 0 !important;
+}
+
+.rsvp-modal-card .modal-greeting {
+  gap: 3px !important;
+  margin: 0 !important;
+}
+
+.rsvp-modal-card .greeting-thanks {
+  font-size: 0.88rem !important;
+  line-height: 1.35 !important;
+}
+
+.rsvp-modal-card .greeting-sub-invite {
+  font-size: 0.92rem !important;
+  line-height: 1.35 !important;
+  color: #b45309 !important;
+}
+
+.rsvp-modal-card .modal-wish-wrap {
+  margin: 2px 0 4px !important;
+  padding: 10px 14px !important;
+  gap: 6px !important;
+  border-radius: 14px !important;
+}
+
+.rsvp-modal-card .wish-label {
+  font-size: 0.82rem !important;
+}
+
+.rsvp-modal-card .modal-wish-input {
+  padding: 9px 12px !important;
+  font-size: 0.88rem !important;
+  border-radius: 10px !important;
+}
+
+.rsvp-modal-card .rsvp-choices-grid {
+  gap: 12px !important;
+  margin: 4px 0 2px !important;
+}
+
+.rsvp-modal-card .rsvp-option-btn {
+  padding: 12px 10px !important;
+  min-height: 62px !important;
+  border-radius: 14px !important;
+}
+
+.rsvp-modal-card .choice-title-main {
+  font-size: 0.92rem !important;
+}
+
+.rsvp-modal-card .choice-emoticon {
+  font-size: 1.05rem !important;
+}
+
+/* KHI XOAY NGANG TREN DIEN THOAI (LANDSCAPE - CHIEU CAO NHO <= 540PX) */
+@media (max-height: 540px), (orientation: landscape) and (max-height: 600px) {
+  .rsvp-modal-overlay, #modal-rsvp-popup.modal-overlay {
+    padding: 6px 12px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .rsvp-modal-card,
+  #modal-rsvp-popup .modal-card,
+  body.mode-phone-frame.phone-landscape .rsvp-modal-card {
+    max-width: min(460px, 92vw) !important;
+    max-height: calc(100dvh - 10px) !important;
+    padding: 10px 16px 10px !important;
+    gap: 5px !important;
+    border-radius: 16px !important;
+    overflow-y: auto !important;
+  }
+
+  .rsvp-modal-card .modal-cap-icon,
+  body.mode-phone-frame.phone-landscape .rsvp-modal-card .modal-cap-icon {
+    font-size: 24px !important;
+    margin-bottom: -4px !important;
+  }
+
+  .rsvp-modal-card .modal-title,
+  body.mode-phone-frame.phone-landscape .rsvp-modal-card .modal-title {
+    font-size: 1.12rem !important;
+    margin: 0 !important;
+  }
+
+  .rsvp-modal-card .modal-greeting,
+  body.mode-phone-frame.phone-landscape .modal-greeting {
+    gap: 2px !important;
+    margin: 0 !important;
+  }
+
+  .rsvp-modal-card .greeting-thanks,
+  body.mode-phone-frame.phone-landscape .greeting-thanks {
+    font-size: 0.8rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .rsvp-modal-card .greeting-sub-invite,
+  body.mode-phone-frame.phone-landscape .greeting-sub-invite {
+    font-size: 0.84rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .rsvp-modal-card .modal-wish-wrap,
+  body.mode-phone-frame.phone-landscape .modal-wish-wrap {
+    margin: 2px 0 !important;
+    padding: 6px 10px !important;
+    gap: 3px !important;
+    border-radius: 10px !important;
+  }
+
+  .rsvp-modal-card .wish-label {
+    font-size: 0.76rem !important;
+  }
+
+  .rsvp-modal-card .modal-wish-input {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+    border-radius: 8px !important;
+  }
+
+  .rsvp-modal-card .rsvp-choices-grid,
+  body.mode-phone-frame.phone-landscape .modal-actions {
+    gap: 8px !important;
+    margin: 2px 0 0 !important;
+  }
+
+  .rsvp-modal-card .rsvp-option-btn,
+  body.mode-phone-frame.phone-landscape .btn-rsvp {
+    padding: 8px 10px !important;
+    min-height: 48px !important;
+    border-radius: 10px !important;
+  }
+
+  .rsvp-modal-card .choice-title-main {
+    font-size: 0.84rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .rsvp-modal-card .choice-emoticon {
+    font-size: 0.95rem !important;
   }
 }

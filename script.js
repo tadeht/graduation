@@ -664,50 +664,72 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-      function enterCinemaFullscreen() {
+  function enterCinemaFullscreen() {
     const playerBox = document.querySelector('.cinema-player-box') || video;
     document.body.classList.add('cinema-fullscreen-mode');
     if (playerBox) playerBox.classList.add('is-fullscreen');
     if (btnFullscreenToggle) {
-      btnFullscreenToggle.textContent = '🗗';
+      btnFullscreenToggle.textContent = '⤓';
       btnFullscreenToggle.setAttribute('title', 'Thu nhỏ màn hình');
     }
 
-    // Mở toàn màn hình thật trên laptop/máy tính hoặc điện thoại
-    const elemToFull = document.documentElement || playerBox;
+    // Trên iPhone / iPad (iOS Safari): Sử dụng webkitEnterFullscreen trực tiếp trên thẻ video
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS && video && video.webkitEnterFullscreen) {
+      try {
+        video.webkitEnterFullscreen();
+        return;
+      } catch (err) {}
+    }
+
+    const elemToFull = playerBox || document.documentElement;
     if (elemToFull && elemToFull.requestFullscreen) {
       elemToFull.requestFullscreen().catch(() => {
-        if (playerBox && playerBox.requestFullscreen) {
-          playerBox.requestFullscreen().catch(() => {});
+        if (video && video.webkitEnterFullscreen) {
+          try { video.webkitEnterFullscreen(); } catch (e) {}
         }
       });
     } else if (playerBox && playerBox.requestFullscreen) {
       playerBox.requestFullscreen().catch(() => {});
     } else if (video && video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();
+      try { video.webkitEnterFullscreen(); } catch (e) {}
     } else if (video && video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
+      try { video.webkitRequestFullscreen(); } catch (e) {}
     }
   }
 
   function exitAnyFullscreen() {
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
+    try {
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
       }
-    }
+    } catch (e) {}
+
     document.body.classList.remove('cinema-fullscreen-mode');
     const playerBox = document.querySelector('.cinema-player-box');
     if (playerBox) playerBox.classList.remove('is-fullscreen');
     if (btnFullscreenToggle) {
       btnFullscreenToggle.textContent = '⛶';
       btnFullscreenToggle.setAttribute('title', 'Toàn màn hình');
+    }
+
+    // Đảm bảo video không bị đơ hoặc tạm dừng sai sau khi thoát fullscreen
+    if (video && video.paused && !video.ended) {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          if (btnBigPlay) btnBigPlay.style.display = 'flex';
+          if (btnPlayPause) btnPlayPause.textContent = '▶';
+        });
+      }
     }
 
     // Đảm bảo sau khi thoát fullscreen sẽ luôn quay về hướng ngang (Landscape) như ban đầu
@@ -723,26 +745,67 @@ document.addEventListener('DOMContentLoaded', () => {
   // Đồng bộ trạng thái khi người dùng nhấn Esc hoặc phím tắt thoát fullscreen từ trình duyệt
   document.addEventListener('fullscreenchange', () => {
     if (!document.fullscreenElement) {
-      document.body.classList.remove('cinema-fullscreen-mode');
-      const playerBox = document.querySelector('.cinema-player-box');
-      if (playerBox) playerBox.classList.remove('is-fullscreen');
-      if (btnFullscreenToggle) {
-        btnFullscreenToggle.textContent = '⛶';
-        btnFullscreenToggle.setAttribute('title', 'Toàn màn hình');
-      }
+      exitAnyFullscreen();
     }
   });
   document.addEventListener('webkitfullscreenchange', () => {
     if (!document.webkitFullscreenElement) {
-      document.body.classList.remove('cinema-fullscreen-mode');
-      const playerBox = document.querySelector('.cinema-player-box');
-      if (playerBox) playerBox.classList.remove('is-fullscreen');
-      if (btnFullscreenToggle) {
-        btnFullscreenToggle.textContent = '⛶';
-        btnFullscreenToggle.setAttribute('title', 'Toàn màn hình');
-      }
+      exitAnyFullscreen();
     }
   });
+
+  // LẮNG NGHE SỰ KIỆN THOÁT FULLSCREEN TRÊN IOS SAFARI (IPHONE / IPAD)
+  if (video) {
+    video.addEventListener('webkitendfullscreen', () => {
+      exitAnyFullscreen();
+      // Khôi phục và đảm bảo video phát tiếp mượt mà, không bị đơ
+      if (video.paused && !video.ended) {
+        const p = video.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            if (btnBigPlay) btnBigPlay.style.display = 'flex';
+            if (btnPlayPause) btnPlayPause.textContent = '▶';
+          });
+        }
+      }
+    });
+
+    video.addEventListener('webkitbeginfullscreen', () => {
+      document.body.classList.add('cinema-fullscreen-mode');
+      const playerBox = document.querySelector('.cinema-player-box');
+      if (playerBox) playerBox.classList.add('is-fullscreen');
+      if (btnFullscreenToggle) {
+        btnFullscreenToggle.textContent = '⤓';
+        btnFullscreenToggle.setAttribute('title', 'Thu nhỏ màn hình');
+      }
+    });
+
+    // Đồng bộ nút Play/Pause tự động theo trạng thái thực tế của video
+    video.addEventListener('play', () => {
+      if (btnPlayPause) btnPlayPause.textContent = '⏸';
+      if (btnBigPlay) btnBigPlay.style.display = 'none';
+    });
+
+    video.addEventListener('pause', () => {
+      if (btnPlayPause) btnPlayPause.textContent = '▶';
+      if (btnBigPlay) btnBigPlay.style.display = 'flex';
+    });
+
+    video.addEventListener('playing', () => {
+      if (btnPlayPause) btnPlayPause.textContent = '⏸';
+      if (btnBigPlay) btnBigPlay.style.display = 'none';
+    });
+
+    // Chạm trực tiếp vào khung video để Play / Pause tiện lợi
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (video.paused || video.ended) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }
 
   const toggleFullscreen = () => {
     const isCurrentlyFullscreen = document.fullscreenElement ||
