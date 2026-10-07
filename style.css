@@ -3831,16 +3831,19 @@ body.cinematic-dim .mascot-speech-bubble {
    ========================================================================== */
 .idle-hint-message {
   position: absolute;
-  top: 13%;
-  left: 50%;
+  bottom: calc(13.8% + 11.5% + 14px);
+  top: auto;
+  left: 50.3%;
   transform: translate3d(-50%, 0, 0);
   color: #fff9ed;
   font-family: var(--font-heading, 'Quicksand', 'Be Vietnam Pro', sans-serif);
-  font-size: 1.25rem;
+  font-size: clamp(12.5px, 1.7vw, 16.5px);
   font-weight: 600;
   letter-spacing: 0.8px;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  width: max-content;
+  max-width: min(92vw, 560px);
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -8457,18 +8460,37 @@ body.mode-phone-frame .lobby-desk-stage.desk-explorer-active .explorer-status-me
   transform: translateX(-50%) scale(0.98) !important;
 }
 
-/* Dòng chữ nhắc nhở tao nhã: Tự động căn tỷ lệ chữ đẹp mắt */
+/* Dòng chữ nhắc nhở tao nhã: Luôn nằm gọn gàng bên trong khung hình bàn học, lơ lửng ngay trên lá thư */
 .lobby-desk-stage:not(.desk-explorer-active) .idle-hint-message {
   position: absolute !important;
-  top: 22% !important;
-  left: 50% !important;
+  left: 50.3% !important;
+  bottom: calc(13.8% + 11.5% + 14px) !important;
+  top: auto !important;
   transform: translateX(-50%) !important;
   pointer-events: none !important;
-  white-space: nowrap !important;
-  font-size: clamp(13px, 1.5vw, 19px) !important;
+  white-space: normal !important;
+  width: max-content !important;
+  max-width: min(92vw, 560px) !important;
+  text-align: center !important;
+  font-size: clamp(12.5px, 1.7vw, 16.5px) !important;
+  line-height: 1.4 !important;
   color: #fff9ed !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.85), 0 0 15px rgba(255,215,100,0.45) !important;
+  text-shadow: 
+    0 2px 8px rgba(15, 10, 5, 0.95), 
+    0 0 16px rgba(255, 215, 100, 0.65),
+    0 0 30px rgba(255, 230, 160, 0.4) !important;
   z-index: 30 !important;
+  padding: 0 12px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 767px) {
+  .lobby-desk-stage:not(.desk-explorer-active) .idle-hint-message {
+    bottom: calc(13.8% + 11.5% + 10px) !important;
+    font-size: clamp(12px, 3.6vw, 15px) !important;
+    max-width: 90vw !important;
+    padding: 0 8px !important;
+  }
 }
 
 
