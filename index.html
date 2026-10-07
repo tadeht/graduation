@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thư Mời Lễ Tốt Nghiệp • Tân Kỹ Sư Nguyễn Thế Đạt • HUBT 2026</title>
+  
+  <meta name="description" content="Thư mời tham dự Lễ tốt nghiệp Đại học Tân Kỹ sư Công nghệ Thông tin Nguyễn Thế Đạt - Đại học Kinh doanh và Công nghệ Hà Nội (HUBT).">
+  <meta property="og:title" content="Thư Mời Lễ Tốt Nghiệp • Tân Kỹ Sư Nguyễn Thế Đạt">
+  <meta property="og:description" content="Trân trọng kính mời bạn đến chung vui ngày Lễ Tốt Nghiệp tại HUBT!">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@600;700&family=Charm:wght@700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css?v=20261006_clean_ending_wishes_v15">
+</head>
+<body class="mode-desktop-fullscreen">
+
+
+
+  <!-- =======================================================================
+       THANH LỜI CHÚC CHẠY NGANG (WISHES MARQUEE TICKER)
+       Thay thế thanh test cũ theo yêu cầu: Hiển thị lời chúc chạy ngang,
+       click vào thanh ngang để xem tất cả lời chúc kèm mốc thời gian chi tiết.
+       ======================================================================= -->
+  <aside id="wishes-marquee-bar" class="wishes-marquee-bar" role="region" aria-label="Lời chúc của mọi người" title="Chạm vào dòng chữ để xem tất cả lời chúc">
+    <div class="marquee-track-container" id="marquee-track-container">
+      <div class="marquee-track" id="marquee-track">
+        <!-- Tự động load từ database: Tên: Lời chúc -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- GỢI Ý HƯỚNG DẪN CHẶNG CUỐI (4S RHYTHM GOLD TEXT DƯỚI KHU VỰC CHÚC) -->
+  <div id="desk-explorer-hint-msg" class="desk-explorer-hint-msg" aria-live="polite">
+    <span class="hint-sparkle">✨</span> Cậu chạm vào các món đồ trên bàn học (Bản đồ • Thời gian • Bảng điểm • Thẻ SV) để khám phá nhé! <span class="hint-sparkle">✨</span>
+  </div>
+
+  <!-- Khung chứa ứng dụng chính (App Shell Container) -->
+  <div id="device-phone-shell" class="device-phone-shell">
+
+
+  <!-- Bầu không khí: Hạt nắng bụi & lá thu bay lơ lửng -->
+  <div id="ambient-particles" aria-hidden="true"></div>
+
+  <!-- Nút Quay lại bàn học (Góc trái trên) -->
+  <aside class="back-control-container" id="back-control-container">
+    <button id="btn-back-to-lobby" class="btn-back-to-lobby" title="Quay lại bàn học" aria-label="Quay lại bàn học">
+      <svg class="back-chevron-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Nút Trình phát nhạc đĩa than: Chỉ hiển thị chiếc đĩa, có đường gạch chéo khi tắt âm thanh -->
+  <aside class="audio-control-container" id="audio-control-container" title="Bật/Tắt nhạc nền">
+    <button id="music-toggle-btn" class="vinyl-record-btn is-muted" type="button" aria-label="Bật hoặc tắt nhạc nền" title="Bật/Tắt nhạc nền">
+      <div class="vinyl-disc">
+        <div class="vinyl-core"></div>
+        <div class="vinyl-mute-slash" aria-hidden="true"></div>
+      </div>
+      <div class="tonearm"></div>
+    </button>
+  </aside>
+
+  <!-- Nút Bỏ qua video ở góc trên bên phải (Thay thế vị trí nút nhạc khi xem video) -->
+  <aside class="skip-control-container" id="skip-control-container">
+    <button id="btn-skip-cinema-top" class="btn-skip-cinema-top" title="Bỏ qua video để đến phần xác nhận">
+      <span>Bỏ qua</span>
+      <span class="skip-arrow">⏭</span>
+    </button>
+  </aside>
+
+  <!-- Bé Mascot Chibi Cử nhân tương tác -->
+  <!-- Canvas Pháo hoa khi xác nhận -->
+  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==================== KHUNG VIEWPORT ỨNG DỤNG ==================== -->
+  <main id="app-viewport" class="app-viewport">
+
+    <!-- =======================================================================
+         MÀN 1: LÁ THƯ KHỔ NGANG VIẾT TAY & GẤP 3 NẾP THẬT (TRIPTYCH FOLD)
+         ======================================================================= -->
+    <section id="screen-letter-write" class="screen-stage active" aria-label="Sảnh chờ góc bàn học Ghibli & Thư mời tốt nghiệp">
+      
+      <!-- Bối cảnh anime Ghibli: Góc bàn học cạnh khung cửa sổ mở hé đón nắng -->
+      <div class="ghibli-room-backdrop" id="ghibli-room-backdrop" aria-hidden="true"></div>
+      <div class="god-rays-overlay" aria-hidden="true"></div>
+      <div class="dappled-sunlight-spots" aria-hidden="true"></div>
+
+      <!-- ===============================================================
+           KHU CHỜ NGHỆ THUẬT: LÁ THƯ NẰM TRÊN MẶT BÀN HỌC GHIBLI CHÂN THỰC
+           =============================================================== -->
+      <div id="lobby-desk-stage" class="lobby-desk-stage">
+        <!-- Dòng chữ nhắc nhở tao nhã thuần Text, tự động hiện sau 7s nếu chưa chạm mở -->
+        <div id="idle-hint-message" class="idle-hint-message" aria-live="polite">
+          <span class="hint-sparkle">✨</span> Cậu chạm vào bức thư trên bàn để mở thiệp mời nhé <span class="hint-sparkle">✨</span>
+        </div>
+
+        <!-- Vùng tương tác duy nhất của LẦN 1: Bức thư sáp đỏ trên bàn học (Viền sáng nhịp thở) -->
+        <div id="waiting-desk-letter-hotspot" class="waiting-desk-letter-hotspot" role="button" tabindex="0" title="Chạm để mở thư mời" aria-label="Lá thư mời tốt nghiệp trên bàn học. Nhấn vào để mở">
+          <!-- Viền sáng nhịp thở ôm khít phong thư sáp đỏ -->
+          <div class="letter-breathing-glow-container" aria-hidden="true">
+            <svg class="letter-breathing-glow-svg" viewBox="0 0 270 86" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="goldenBreathingGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur1" />
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur2" />
+                  <feMerge>
+                    <feMergeNode in="blur2" />
+                    <feMergeNode in="blur1" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <linearGradient id="envelopeBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff8db"/>
+                  <stop offset="35%" stop-color="#ffe699"/>
+                  <stop offset="70%" stop-color="#ffd269"/>
+                  <stop offset="100%" stop-color="#ffb833"/>
+                </linearGradient>
+              </defs>
+
+              <polygon class="envelope-glow-aura" points="10,8 248,0 270,78 0,86" fill="rgba(255, 235, 160, 0.04)" stroke="url(#envelopeBorderGrad)" stroke-width="3" filter="url(#goldenBreathingGlow)" />
+              <polygon class="envelope-glow-rim" points="10,8 248,0 270,78 0,86" fill="none" stroke="url(#envelopeBorderGrad)" stroke-width="1.8" />
+              <ellipse class="wax-seal-glow" cx="132" cy="40" rx="27" ry="19" fill="none" stroke="rgba(255, 215, 110, 0.95)" stroke-width="1.8" filter="url(#goldenBreathingGlow)" />
+            </svg>
+
+            <div class="glow-sparkle sparkle-top-left"></div>
+            <div class="glow-sparkle sparkle-bottom-right"></div>
+          </div>
+        </div>
+
+        <!-- THANH HEADER THÔNG BÁO VÀ GỢI Ý KHÁM PHÁ BÀN HỌC GHIBLI (DESK EXPLORER) -->
+                <!-- THANH HEADER THÔNG BÁO VÀ GỢI Ý KHÁM PHÁ BÀN HỌC GHIBLI (DESK EXPLORER) -->
+        <div id="desk-explorer-banner" class="desk-explorer-banner" style="display: none;" aria-live="polite">
+          <div class="explorer-banner-inner">
+            <div id="explorer-status-message" class="explorer-status-message">
+              <!-- Cập nhật tự động từ JS theo trạng thái RSVP -->
+            </div>
+            <div class="explorer-hint-sub">
+              <span class="hint-sparkle">?</span> Khám phá các dụng cụ nằm trên bàn học để xem từng thông tin chi tiết nhé! <span class="hint-sparkle">?</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LỚP SVG TƯƠNG TÁC BO VIỀN ÔM SÁT 100% TỪNG VẬT THỂ TRÊN BÀN HỌC -->
+                <!-- LỚP SVG TƯƠNG TÁC BO VIỀN ÔM SÁT 100% TỪNG VẬT THỂ TRÊN BÀN HỌC -->
+                <!-- LỚP SVG TƯƠNG TÁC BO VIỀN ÔM SÁT 100% TỪNG VẬT THỂ TRÊN BÀN HỌC -->
+        <!-- Khung tranh bàn học toàn cảnh (Panoramic Desk Viewfinder) -->
+        <div id="desk-panoramic-viewfinder" class="desk-panoramic-viewfinder">
+          <svg id="desk-interactive-svg-layer" class="desk-interactive-svg-layer" viewBox="0 0 1376 768" preserveAspectRatio="none" style="display: none;" aria-label="Bản đồ tương tác các vật phẩm trên bàn học">
+            <defs>
+              <!-- Filter hào quang mờ dịu (Smooth Soft Glow) không còn đường kẻ thô -->
+              <filter id="deskContourGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur1" />
+                <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                </feMerge>
+              </filter>
+
+              <linearGradient id="goldContourGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff8db" />
+                <stop offset="35%" stop-color="#ffe699" />
+                <stop offset="70%" stop-color="#ffd269" />
+                <stop offset="100%" stop-color="#ffb833" />
+              </linearGradient>
+            </defs>
+
+            <!-- 1. TẤM BẢN ĐỒ CỔ (Bám sát 100% theo đúng nét vẽ tay của bạn Đạt) -->
+            <g id="hotspot-map" class="svg-hotspot-item item-map" role="button" tabindex="0" title="Chạm để xem địa chỉ cụ thể &amp; bản đồ Google Maps" aria-label="Tấm bản đồ chỉ đường">
+              <polygon class="hotspot-hit-area" points="244,536 622,512 580,656 208,665" />
+              <polygon class="contour-aura" points="244,536 622,512 580,656 208,665" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="244,536 622,512 580,656 208,665" />
+              
+              <foreignObject x="235" y="445" width="240" height="55" class="svg-foreign-tooltip">
+                <div class="hotspot-floating-badge badge-map">
+                  <span class="badge-icon">🗺️</span>
+                  <span class="badge-text">Địa Chỉ &amp; Bản Đồ HUBT</span>
+                </div>
+              </foreignObject>
+            </g>
+
+            <!-- 2. THẺ SINH VIÊN (Ôm khít 4 góc thẻ nghiêng & kẹp kim loại) -->
+            <g id="hotspot-badge" class="svg-hotspot-item item-badge" role="button" tabindex="0" title="Chạm để xem thông tin liên hệ của Đạt" aria-label="Thẻ sinh viên của Đạt">
+              <polygon class="hotspot-hit-area" points="407,621 520,600 538,652 422,673" />
+              <polygon class="hotspot-hit-area" points="458,594 470,592 472,614 460,616" />
+              <polygon class="contour-aura" points="407,621 520,600 538,652 422,673" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="407,621 520,600 538,652 422,673" />
+              <polygon class="contour-aura" points="458,594 470,592 472,614 460,616" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="458,594 470,592 472,614 460,616" />
+              
+              <foreignObject x="355" y="535" width="230" height="55" class="svg-foreign-tooltip">
+                <div class="hotspot-floating-badge badge-badge">
+                  <span class="badge-icon">🪪</span>
+                  <span class="badge-text">Thông Tin Liên Hệ</span>
+                </div>
+              </foreignObject>
+            </g>
+
+            <!-- 3. LÁ THƯ SÁP ĐỎ (Ôm khít 4 góc phong bì, không tràn sang trái, con dấu sáp tròn) -->
+            <g id="hotspot-letter" class="svg-hotspot-item item-letter" role="button" tabindex="0" title="Chạm để xem lại video Vlog thanh xuân" aria-label="Lá thư phong bì sáp đỏ">
+              <polygon class="hotspot-hit-area" points="568,584 806,576 828,654 558,662" />
+              <polygon class="contour-aura" points="568,584 806,576 828,654 558,662" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="568,584 806,576 828,654 558,662" />
+              <ellipse class="contour-seal-ring contour-aura" cx="690" cy="616" rx="29" ry="21" filter="url(#deskContourGlow)" />
+              <ellipse class="contour-seal-rim contour-rim" cx="690" cy="616" rx="29" ry="21" />
+              
+              <foreignObject x="575" y="688" width="230" height="55" class="svg-foreign-tooltip">
+                <div class="hotspot-floating-badge badge-letter">
+                  <span class="badge-icon">🎬</span>
+                  <span class="badge-text">Xem Lại Video Vlog</span>
+                </div>
+              </foreignObject>
+            </g>
+
+            <!-- 4. CHIẾC ĐỒNG HỒ CỔ (Mái vòm tròn, thân đứng, chân đế gỗ & mặt đồng hồ) -->
+            <g id="hotspot-clock" class="svg-hotspot-item item-clock" role="button" tabindex="0" title="Chạm để xem thời gian chi tiết buổi lễ" aria-label="Chiếc đồng hồ để bàn">
+              <polygon class="hotspot-hit-area" points="886,526 890,516 892,508 900,505 900,445 903,420 918,400 956,386 994,400 1009,420 1012,445 1012,505 1020,508 1022,516 1029,526" />
+              <circle class="hotspot-hit-area" cx="956" cy="445" r="41" />
+              <polygon class="contour-aura" points="886,526 890,516 892,508 900,505 900,445 903,420 918,400 956,386 994,400 1009,420 1012,445 1012,505 1020,508 1022,516 1029,526" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="886,526 890,516 892,508 900,505 900,445 903,420 918,400 956,386 994,400 1009,420 1012,445 1012,505 1020,508 1022,516 1029,526" />
+              <ellipse class="contour-aura" cx="956" cy="380" rx="8" ry="6" filter="url(#deskContourGlow)" />
+              <ellipse class="contour-rim" cx="956" cy="380" rx="8" ry="6" />
+              <circle class="contour-dial-rim contour-rim" cx="956" cy="445" r="41" />
+              
+              <foreignObject x="845" y="325" width="230" height="55" class="svg-foreign-tooltip">
+                <div class="hotspot-floating-badge badge-clock">
+                  <span class="badge-icon">⏰</span>
+                  <span class="badge-text">Thời Gian Buổi Lễ</span>
+                </div>
+              </foreignObject>
+            </g>
+
+            <!-- 5. CUỐN SỔ TAY HỌC TẬP (Đường cong uốn lượn ôm khít 2 trang sách mở cánh bướm & bìa sách) -->
+            <g id="hotspot-notebook" class="svg-hotspot-item item-notebook" role="button" tabindex="0" title="Chạm để xem bảng điểm và thành tích 4 năm đại học" aria-label="Cuốn sổ tay học tập mở">
+              <polygon class="hotspot-hit-area" points="888,573 920,562 960,555 998,553 1030,558 1060,569 1090,558 1125,555 1160,560 1190,566 1208,572 1260,615 1300,655 1322,678 1260,677 1180,676 1130,676 1060,675 980,674 928,674 920,662" />
+              <polygon class="contour-aura" points="888,573 920,562 960,555 998,553 1030,558 1060,569 1090,558 1125,555 1160,560 1190,566 1208,572 1260,615 1300,655 1322,678 1260,677 1180,676 1130,676 1060,675 980,674 928,674 920,662" filter="url(#deskContourGlow)" />
+              <polygon class="contour-rim" points="888,573 920,562 960,555 998,553 1030,558 1060,569 1090,558 1125,555 1160,560 1190,566 1208,572 1260,615 1300,655 1322,678 1260,677 1180,676 1130,676 1060,675 980,674 928,674 920,662" />
+              
+              <foreignObject x="970" y="485" width="260" height="55" class="svg-foreign-tooltip">
+                <div class="hotspot-floating-badge badge-notebook">
+                  <span class="badge-icon">📖</span>
+                  <span class="badge-text">Bảng Điểm &amp; Thành Tích 4 Năm</span>
+                </div>
+              </foreignObject>
+            </g>
+          </svg>
+        </div><!-- /#desk-panoramic-viewfinder -->
+
+        <!-- THANH DOCK 5 PHÍM TẮT KHÁM PHÁ NHANH TRÊN ĐIỆN THOẠI (MOBILE QUICK EXPLORER DOCK) -->
+        <nav id="mobile-quick-dock" class="mobile-quick-dock" aria-label="Khám phá nhanh các mục trên bàn học" style="display: none;">
+          <div class="quick-dock-header">
+            <span class="dock-header-sparkle">✨</span>
+            <span>Chạm vào đồ vật trên bàn hoặc chọn phím tắt:</span>
+          </div>
+          <div class="quick-dock-items">
+            <button type="button" class="dock-item-btn btn-dock-letter" data-target="letter" title="Xem thư mời chính thức &amp; vlog">
+              <span class="dock-btn-icon">📜</span>
+              <div class="dock-btn-text">
+                <span class="dock-btn-label">Thiệp Mời</span>
+                <small class="dock-btn-sub">Vlog kỷ niệm</small>
+              </div>
+            </button>
+            <button type="button" class="dock-item-btn btn-dock-notebook" data-target="notebook" title="Xem sổ bảng điểm K27">
+              <span class="dock-btn-icon">📖</span>
+              <div class="dock-btn-text">
+                <span class="dock-btn-label">Sổ Điểm</span>
+                <small class="dock-btn-sub">MSV: 2722225705</small>
+              </div>
+            </button>
+            <button type="button" class="dock-item-btn btn-dock-clock" data-target="clock" title="Xem thời gian &amp; lịch trình buổi lễ">
+              <span class="dock-btn-icon">⏰</span>
+              <div class="dock-btn-text">
+                <span class="dock-btn-label">Giờ Hẹn</span>
+                <small class="dock-btn-sub">09:30 • 16/10</small>
+              </div>
+            </button>
+            <button type="button" class="dock-item-btn btn-dock-map" data-target="map" title="Xem địa chỉ &amp; bản đồ Google Maps">
+              <span class="dock-btn-icon">🗺️</span>
+              <div class="dock-btn-text">
+                <span class="dock-btn-label">Bản Đồ</span>
+                <small class="dock-btn-sub">HUBT Vĩnh Tuy</small>
+              </div>
+            </button>
+            <button type="button" class="dock-item-btn btn-dock-badge" data-target="badge" title="Xem thẻ sinh viên &amp; liên hệ Đạt">
+              <span class="dock-btn-icon">🪪</span>
+              <div class="dock-btn-text">
+                <span class="dock-btn-label">Liên Hệ</span>
+                <small class="dock-btn-sub">Tân Kỹ Sư Đạt</small>
+              </div>
+            </button>
+          </div>
+        </nav>
+      </div>
+      <!-- ===============================================================
+           KHUNG LÁ THƯ KHỔ NGANG TO: BAN ĐẦU ẨN HOÀN TOÀN, CHỈ HIỆN KHI ẤN VÀO THƯ
+           =============================================================== -->
+      <!-- Hiệu ứng Cinematic: Xung quanh tối dần tập trung vào lá thư và ánh đèn bàn ấm áp -->
+      <div class="cinematic-desk-spotlight" id="cinematic-spotlight" aria-hidden="true"></div>
+      <div class="desk-lamp-lightbeam" aria-hidden="true"></div>
+
+      <div class="landscape-desk-container" id="landscape-desk-container" style="display: none;">
+        
+        <!-- Khung lá thư khổ ngang nằm trên bàn gỗ -->
+        <div class="letter-trifold-envelope-stage" id="trifold-envelope-stage">
+          
+          <article class="letter-landscape-sheet" id="letter-landscape-sheet">
+            <div class="paper-vintage-texture" aria-hidden="true"></div>
+            <div class="letter-corner-decor corner-tl" aria-hidden="true"></div>
+            <div class="letter-corner-decor corner-br" aria-hidden="true"></div>
+
+            <!-- Nếp 1: Phần trên cùng (gập úp xuống) -->
+            <div class="trifold-panel panel-top" id="panel-top">
+              <div class="panel-inner">
+                <div class="sheet-header-decor">
+                  <div class="crest-group">
+                    <span class="sheet-crest">🎓 LỄ TỐT NGHIỆP • KỸ SƯ CÔNG NGHỆ THÔNG TIN</span>
+                    <span class="sheet-subcrest">ĐẠI HỌC KINH DOANH VÀ CÔNG NGHỆ HÀ NỘI • KHÓA 27 (2022 - 2026)</span>
+                  </div>
+                  <div class="postmark-stamp">
+                    <span class="sheet-date-stamp">Hà Nội, Thu 2026 🍁</span>
+                  </div>
+                </div>
+                <div class="letter-intro-line">
+                  <p class="poetic-line">"Những năm tháng rực rỡ nhất của thanh xuân, cảm ơn vì đã có cậu đồng hành..."</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nếp 2: Phần thân giữa (có dòng viết tay tên khách mời) -->
+            <div class="trifold-panel panel-middle" id="panel-middle">
+              <div class="panel-inner">
+                <div class="greeting-row-horizontal">
+                  <span class="salutation-text">Thân gửi:</span>
+                  <div class="handwritten-input-container">
+                    <input
+                      type="text"
+                      id="guest-name-input"
+                      class="handwritten-input-landscape"
+                      value=""
+                      placeholder=""
+                      maxlength="30"
+                      autocomplete="off"
+                      spellcheck="false"
+                      autocorrect="off"
+                      autocapitalize="words"
+                    >
+                    <!-- Ngòi bút máy mạ vàng lướt theo nét chữ -->
+                    <div id="calligraphy-pen-nib" class="calligraphy-pen-nib" aria-hidden="true">
+                      <svg viewBox="0 0 44 44" width="36" height="36" class="pen-nib-svg" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Thân bút sơn mài xanh đen bóng viền vàng -->
+                        <path d="M30,2 L38,10 L20,28 L12,20 Z" fill="#141c2b" stroke="#e5a93c" stroke-width="1.8"/>
+                        <!-- Cổ bút mạ vàng nhũ -->
+                        <polygon points="12,20 20,28 14,34 6,26" fill="#e5a93c" stroke="#b37d22" stroke-width="1"/>
+                        <!-- Ngòi bút vàng 14k mũi nhọn -->
+                        <polygon points="6,26 14,34 3,42" fill="#ffd56b" stroke="#d49b28" stroke-width="1.2"/>
+                        <!-- Rãnh dẫn mực & lỗ thở ngòi bút -->
+                        <line x1="8.5" y1="31" x2="3" y2="42" stroke="#101a2e" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="8.5" cy="31" r="1.2" fill="#101a2e"/>
+                      </svg>
+                      <!-- Tia sáng tinh linh lấp lánh tại đầu ngòi bút -->
+                      <span class="pen-nib-sparkle" aria-hidden="true">✨</span>
+                    </div>
+                    <div class="lined-paper-groove"></div>
+                  </div>
+                </div>
+
+                <p class="letter-body-message">
+                  Bốn năm tại giảng đường HUBT đã khép lại bằng tấm bằng Kỹ sư Công nghệ Thông tin. Trong khoảnh khắc Đạt khoác lên mình chiếc áo cử nhân, Đạt mong muốn có sự hiện diện của cậu để cùng lưu giữ cột mốc quan trọng và rực rỡ nhất này.
+                </p>
+              </div>
+            </div>
+
+            <!-- Nếp 3: Phần đáy (gập lật lên) -->
+            <div class="trifold-panel panel-bottom" id="panel-bottom">
+              <div class="panel-inner">
+                <div class="sign-row-horizontal">
+                  <span class="sign-tag">Người bạn đại học của cậu,</span>
+                  <div class="signature-wrap">
+                    <strong class="author-sign">Nguyễn Thế Đạt</strong>
+                    <!-- Dấu triện son đỏ mini phong cách Á Đông / Ghibli -->
+                    <span class="hanko-seal" title="Triện son Đạt">ĐẠT 印</span>
+                  </div>
+                </div>
+
+                <div class="panel-action-bar">
+                  <button id="btn-pack-letter" class="btn-ribbon-action" title="Nhấn để gói lại lá thư">
+                    <span class="ribbon-glow-line" aria-hidden="true"></span>
+                    <svg class="btn-ribbon-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#ffd269" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span class="btn-text-content">Gói lại</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </article>
+
+          <!-- Chiếc phong bì nằm chờ phía dưới đón lá thư đã gấp: BAN ĐẦU ẨN HOÀN TOÀN, CHỈ XUẤT HIỆN KHI BẤM GẤP THƯ -->
+          <div class="receiver-envelope-landscape" id="receiver-envelope" style="display: none;">
+            <div class="env-back"></div>
+            <div class="env-pocket"></div>
+            <div class="env-flap-top" id="env-flap-top"></div>
+            <div class="env-wax-stamp" id="env-wax-stamp">
+              <span>ĐẠT</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="landscape-desk-hint" id="packing-hint-text">✨ Cậu nắn nót viết tên lên dòng kẻ lá thư rồi bấm gấp lại nhé ✨</div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MÀN 2: RẠP CHIẾU PHIM CINEMA FULLSCREEN PHÁT VLOG TỐT NGHIỆP
+         ======================================================================= -->
+    <section id="screen-cinema" class="screen-stage" aria-label="Rạp chiếu phim Vlog tốt nghiệp">
+      <div class="cinema-theater-container">
+        
+        <!-- Header rạp phim -->
+        <div class="cinema-theater-header">
+          <div class="film-tag">
+            <span class="film-indicator-dot"></span>
+            <span>Final Episode: Graduation Day 🎓</span>
+          </div>
+        </div>
+
+        <!-- Khung trình chiếu video 9:16 dọc -->
+        <div class="cinema-player-box">
+          <video 
+            id="graduation-video" 
+            class="graduation-video" 
+            playsinline 
+            preload="metadata"
+            src="./assets/videos/vlog_graduation.mp4"
+          >
+            Trình duyệt của bạn không hỗ trợ video HTML5.
+          </video>
+
+          <!-- Nút Play khổng lồ khi trình duyệt chặn tự động phát -->
+          <button id="btn-big-play" class="btn-big-play" aria-label="Phát video">
+            <span class="big-play-triangle">▶</span>
+          </button>
+
+          <!-- Custom Controls Bar -->
+
+          <!-- Custom Controls Bar (Hai tầng gọn gàng, không bao giờ tràn) -->
+          <div class="cinema-custom-controls">
+            <!-- Tầng 1: Thanh tiến trình kéo tua Full Width -->
+            <div class="timeline-bar-wrap">
+              <input type="range" id="video-seek" class="video-seek" min="0" max="100" value="0">
+              <div class="video-progress-fill" id="video-progress-fill"></div>
+            </div>
+            <!-- Tầng 2: Các nút điều khiển phân bổ hai bên -->
+            <div class="cinema-controls-row">
+              <div class="controls-left">
+                <button id="btn-play-pause" class="btn-video-control" aria-label="Phát hoặc Dừng">⏸</button>
+                <span id="video-time-display" class="video-time-display">00:00 / 01:54</span>
+              </div>
+              <div class="controls-right">
+                <button id="btn-mute-toggle" class="btn-video-control" aria-label="Bật hoặc Tắt tiếng">🔊</button>
+                <button id="btn-fullscreen-toggle" class="btn-video-control" aria-label="Toàn màn hình" title="Toàn màn hình">⛶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Đã bỏ text trích dẫn thừa theo yêu cầu của User -->
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MÀN 3: POPUP RSVP XÁC NHẬN THAM GIA (CÓ / KHÔNG)
+         ======================================================================= -->
+    <div id="modal-rsvp-popup" class="modal-overlay rsvp-modal-overlay" aria-hidden="true">
+      <div class="modal-card rsvp-modal-card">
+        <div class="modal-cap-icon">🎓</div>
+        
+        <h2 class="modal-title">Bạn Có Tham Gia Không?</h2>
+        
+        <div class="modal-greeting">
+          <p class="greeting-thanks">Cảm ơn <strong id="modal-guest-display" class="guest-name-pill">bạn</strong> đã bỏ thời gian ra xem hết vlog tâm huyết của mình =))</p>
+          <p class="greeting-sub-invite">Một lời mời đến chụp ảnh cùng trai đẹp beclin ✨</p>
+        </div>
+
+        <!-- Lời chúc mừng / Ghi chú ở GIỮA THEO YÊU CẦU -->
+        <div class="modal-wish-wrap">
+          <label for="modal-guest-wish" class="wish-label">
+            <span class="wish-label-icon">✍️</span> Gửi lời chúc mừng hoặc nhắn gửi đến Đạt (tùy chọn):
+          </label>
+          <input 
+            type="text" 
+            id="modal-guest-wish" 
+            class="modal-wish-input" 
+            placeholder="Chúc Đạt tốt nghiệp rực rỡ, sự nghiệp thăng hoa nha! ✨"
+            maxlength="150"
+          >
+        </div>
+
+        <!-- 2 Nút hành động trực tiếp song song: Trái (Từ chối) - Phải (Đồng ý), BỎ NÚT XÁC NHẬN THỨ 3 -->
+        <div class="rsvp-choices-grid">
+          <!-- BÊN TRÁI: TỪ CHỐI (MÀU ĐỎ) -->
+          <button id="btn-rsvp-no" class="rsvp-option-btn option-no" type="button" aria-label="Mình không đi được rồi :<">
+            <div class="choice-content-wrap">
+              <span class="choice-title-main">Mình không đi được rồi</span>
+              <span class="choice-emoticon">:&lt;</span>
+            </div>
+          </button>
+
+          <!-- BÊN PHẢI: ĐỒNG Ý (MÀU ĐỒNG BỘ) -->
+          <button id="btn-rsvp-yes" class="rsvp-option-btn option-yes" type="button" aria-label="Được rồi lên đồ thôi!!!">
+            <div class="choice-content-wrap">
+              <span class="choice-title-main">Được rồi lên đồ thôi!!!</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- =======================================================================
+         MODAL CHI TIẾT KHÁM PHÁ VẬT THỂ BÀN HỌC (GHIBLI DESK EXPLORER DETAIL MODAL)
+         ======================================================================= -->
+    <div id="modal-desk-detail" class="modal-overlay desk-detail-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="modal-card desk-detail-modal-card">
+        <button id="btn-close-desk-modal" class="desk-modal-close-btn" type="button" aria-label="Đóng popup">&times;</button>
+        
+        <div class="desk-modal-header">
+          <div id="desk-modal-icon" class="desk-modal-icon">✨</div>
+          <h2 id="desk-modal-title" class="desk-modal-title">Khám Phá Chi Tiết</h2>
+          <p id="desk-modal-subtitle" class="desk-modal-subtitle">Góc kỷ niệm bàn học Ghibli</p>
+        </div>
+
+        <div id="desk-modal-body" class="desk-modal-body">
+          <!-- Render linh hoạt từ JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL SỔ LƯU BÚT LỜI CHÚC TỐT NGHIỆP (XEM TẤT CẢ LỜI CHÚC + MỐC THỜI GIAN)
+         ======================================================================= -->
+    <div id="modal-all-wishes" class="modal-overlay wishes-modal-overlay" aria-hidden="true">
+      <div class="modal-card wishes-modal-card">
+        <div class="wishes-modal-header">
+          <div class="wishes-modal-title-group">
+            <span class="wishes-header-icon">💌</span>
+            <h2 class="wishes-modal-title">Sổ Lưu Bút Lời Chúc</h2>
+          </div>
+          <button id="btn-close-wishes-modal" class="btn-close-wishes-modal" type="button" aria-label="Đóng sổ lưu bút">✕</button>
+        </div>
+        
+        <p class="wishes-modal-subtitle">Những lời chúc thân thương gửi tặng Kỹ Sư Nguyễn Thế Đạt ✨</p>
+
+        <!-- Form gửi thêm lời chúc trực tiếp -->
+        <form id="form-quick-wish" class="quick-wish-form">
+          <div class="quick-wish-inputs">
+            <input type="text" id="quick-wish-name" class="quick-wish-input-name" placeholder="Tên cậu..." maxlength="30" required>
+            <input type="text" id="quick-wish-text" class="quick-wish-input-text" placeholder="Viết lời chúc gửi đến Đạt..." maxlength="150" required>
+          </div>
+          <button type="submit" id="btn-submit-quick-wish" class="btn-submit-quick-wish">
+            <span>Gửi lời chúc</span> <span>✨</span>
+          </button>
+        </form>
+
+        <!-- Danh sách lời chúc kèm mốc thời gian chi tiết -->
+        <div class="wishes-cards-list" id="wishes-cards-list">
+          <!-- Render danh sách lời chúc tại đây -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         MÀN 4: THIỆP MỜI TRANG TRỌNG, ĐỊA CHỈ & THÔNG TIN LIÊN HỆ ĐẶC BIỆT Ở CUỐI
+         ======================================================================= -->
+    <section id="screen-main-content" class="screen-stage" aria-label="Nội dung thiệp mời, địa chỉ và thông tin liên hệ">
+      
+      <!-- Thanh điều hướng cố định -->
+      <nav class="invitation-nav-bar" aria-label="Điều hướng nhanh">
+        <button id="nav-btn-return-desk" class="nav-pill return-desk-pill" type="button">🌿 Về Bàn Học Ghibli</button>
+        <a href="#section-official-card" class="nav-pill active">💌 Thiệp Mời</a>
+        <a href="#section-map-info" class="nav-pill">📍 Địa Điểm HUBT</a>
+        <a href="#section-contact-dat" class="nav-pill highlight-pill">📞 Liên Hệ Đạt</a>
+        <a href="#section-transcript-summary" class="nav-pill">📊 Bảng Điểm 155 TC</a>
+      </nav>
+
+      <div class="scrollable-content-wrapper">
+        
+        <!-- Hộp hiển thị trạng thái phản hồi RSVP của khách -->
+        <div id="rsvp-status-banner" class="rsvp-status-banner" style="display: none;">
+          <span class="status-icon">🎉</span>
+          <div class="status-content">
+            <strong id="rsvp-status-text">Cảm ơn bạn đã phản hồi!</strong>
+            <span id="rsvp-status-sub">Đạt rất mong được đón bạn tại HUBT!</span>
+          </div>
+        </div>
+
+        <!-- ===== 1. TẤM THIỆP MỜI TRANG TRỌNG ===== -->
+        <section id="section-official-card" class="content-block invitation-official-sheet">
+          <div class="ribbon-banner">Official Invitation</div>
+          
+          <div class="graduate-avatar-frame">
+            <img src="./assets/images/dat_portrait_7518.jpg?v=7518" alt="Chân dung Tân Kỹ sư Nguyễn Thế Đạt" class="real-avatar-img" onerror="this.src='./assets/images/year_4.jpg'">
+            <div class="cap-badge-corner">🎓</div>
+          </div>
+
+          <h2 class="invitation-heading">LỄ TỐT NGHIỆP ĐẠI HỌC K27</h2>
+          <p class="invitation-subhead">
+            Trân trọng kính mời: <strong class="dynamic-name guest-tag">[Tên Khách Mời]</strong>
+          </p>
+
+          <div class="graduate-info-card">
+            <h3 class="grad-name">NGUYỄN THẾ ĐẠT</h3>
+            <p class="grad-title">Tân Kỹ Sư Công Nghệ Thông Tin (Định Hướng Ứng Dụng)</p>
+            <p class="grad-school">Trường Đại Học Kinh Doanh và Công Nghệ Hà Nội (HUBT)</p>
+          </div>
+
+          <!-- Thông tin thời gian sự kiện -->
+          <div class="event-meta-grid">
+            <div class="meta-item">
+              <div class="meta-icon">⏰</div>
+              <div class="meta-text">
+                <strong>Thời Gian Tổ Chức</strong>
+                <span>08:00 – 11:30 | Thứ Hai, Ngày 26/10/2026</span>
+                <small class="highlight-time">Khung giờ chụp ảnh đẹp nhất: 09:30 – 11:00</small>
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <div class="meta-icon">🏛️</div>
+              <div class="meta-text">
+                <strong>Địa Điểm Bế Giảng</strong>
+                <span>Hội Trường Lớn (Tầng 2, Nhà B) • Cơ Sở Vĩnh Tuy</span>
+                <small>Trường Đại học Kinh doanh và Công nghệ Hà Nội</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Đồng hồ đếm ngược -->
+          <div class="countdown-container">
+            <div class="countdown-title">ĐẾM NGƯỢC ĐẾN KHOẢNH KHẮC NHẬN BẰNG</div>
+            <div class="countdown-units">
+              <div class="unit-box"><span class="unit-num" id="days-val">--</span><span class="unit-lbl">Ngày</span></div>
+              <div class="unit-box"><span class="unit-num" id="hours-val">--</span><span class="unit-lbl">Giờ</span></div>
+              <div class="unit-box"><span class="unit-num" id="mins-val">--</span><span class="unit-lbl">Phút</span></div>
+              <div class="unit-box"><span class="unit-num" id="secs-val">--</span><span class="unit-lbl">Giây</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 2. ĐỊA CHỈ TRƯỜNG & CHỈ ĐƯỜNG HUBT ===== -->
+        <section id="section-map-info" class="content-block map-location-section">
+          <div class="section-title-wrap">
+            <span class="section-badge">ĐỊA CHỈ & CHỈ ĐƯỜNG</span>
+            <h2 class="section-heading">Đến Trường HUBT Bằng Cách Nào?</h2>
+          </div>
+
+          <div class="address-box-card">
+            <div class="address-header">
+              <span class="address-pin-icon">📍</span>
+              <div class="address-info-text">
+                <strong>Đại Học Kinh Doanh & Công Nghệ Hà Nội (HUBT)</strong>
+                <p>Số 29A, Ngõ 124 Phố Vĩnh Tuy, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Hà Nội</p>
+              </div>
+            </div>
+
+            <div class="map-iframe-wrapper">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.819777170138!2d105.87324317587002!3d20.99985958876778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ae9835706ccf%3A0x6b2b73bc9df15982!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBLaW5oIERvYW5oIHbDoCBDw7RuZyBOZ2jhu4cgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1727254500000!5m2!1svi!2s" 
+                width="100%" 
+                height="280" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Bản đồ Google Maps HUBT"
+              ></iframe>
+            </div>
+
+            <div class="map-action-row">
+              <a 
+                href="https://maps.google.com/?q=Trường+Đại+Học+Kinh+Doanh+và+Công+Nghệ+Hà+Nội" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-primary btn-map-external"
+              >
+                <span>Mở Trong Google Maps 🗺️</span>
+              </a>
+            </div>
+
+            <!-- Cẩm nang nhỏ dành cho bạn -->
+            <div class="travel-tips-grid">
+              <div class="tip-card">
+                <span class="tip-icon">✨</span>
+                <strong>Cần mang theo gì?</strong>
+                <p>Một nụ cười thật tươi và điện thoại sạc đầy 100% pin để cùng Đạt chụp cả nghìn tấm hình nha!</p>
+              </div>
+              <div class="tip-card">
+                <span class="tip-icon">🎁</span>
+                <strong>Quà cáp thế nào?</strong>
+                <p>Không cần quà cáp cầu kỳ đâu ạ. Sự có mặt của bạn chính là món quà ý nghĩa và quý giá nhất!</p>
+              </div>
+              <div class="tip-card">
+                <span class="tip-icon">🅿️</span>
+                <strong>Gửi xe & Lối vào</strong>
+                <p>Gửi xe tại hầm xe nhà A hoặc bãi xe phụ ngõ 124 Vĩnh Tuy, đi thẳng vào sảnh Hội trường Nhà B.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 3. BẢNG TỔNG HỢP 155 TÍN CHỈ 4 NĂM ===== -->
+        <section id="section-transcript-summary" class="content-block transcript-summary-section">
+          <div class="section-title-wrap">
+            <span class="section-badge">HÀNH TRÌNH HỌC TẬP</span>
+            <h2 class="section-heading">Bảng Điểm 155 Tín Chỉ Đại Học</h2>
+            <p class="section-subtext">Hành trình 8 học kỳ vượt qua 155 tín chỉ Công nghệ Thông tin tại HUBT</p>
+          </div>
+
+          <div class="transcript-table-card">
+            <div class="transcript-highlights">
+              <div class="highlight-stat">
+                <span class="stat-number">155</span>
+                <span class="stat-label">Tổng Tín Chỉ</span>
+              </div>
+              <div class="highlight-stat">
+                <span class="stat-number">4 Năm</span>
+                <span class="stat-label">Thời Gian Học</span>
+              </div>
+              <div class="highlight-stat">
+                <span class="stat-number">Khóa 27</span>
+                <span class="stat-label">HUBT CNTT</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== 4. THÔNG TIN LIÊN HỆ ĐẶC BIỆT CỦA ĐẠT Ở CUỐI TRANG ===== -->
+        <section id="section-contact-dat" class="content-block contact-dat-section">
+          <div class="contact-card-highlight">
+            <div class="contact-header">
+              <span class="contact-tag">LIÊN HỆ TRỰC TIẾP</span>
+              <h2 class="contact-heading">Gọi Cho Đạt Khi Đến Nhé!</h2>
+              <p class="contact-sub">Khi bạn đến cổng trường HUBT, chỉ cần bấm nút bên dưới là Đạt sẽ chạy ra đón và chụp ảnh cùng bạn ngay!</p>
+            </div>
+
+            <!-- Khối số điện thoại to rõ ràng -->
+            <div class="hotline-big-box">
+              <span class="hotline-label">SỐ ĐIỆN THOẠI TRỰC TIẾP</span>
+              <a href="tel:0379346540" class="hotline-number-display">
+                <span class="phone-ring-icon">📞</span>
+                <strong>0379 346 540</strong>
+              </a>
+            </div>
+
+            <!-- Bộ nút hành động nhanh 1 chạm -->
+            <div class="contact-actions-row">
+              <a href="tel:0379346540" class="btn-action-touch call-touch" title="Gọi điện cho Đạt">
+                <span class="touch-icon">📞</span>
+                <span>Gọi Cho Đạt Ngay</span>
+              </a>
+
+              <a href="https://zalo.me/0379346540" target="_blank" rel="noopener noreferrer" class="btn-action-touch zalo-touch" title="Nhắn tin qua Zalo">
+                <span class="touch-icon">💬</span>
+                <span>Nhắn Tin Zalo</span>
+              </a>
+
+              <a href="https://www.facebook.com/datintrustforlove" target="_blank" rel="noopener noreferrer" class="btn-action-touch fb-touch" title="Facebook Nguyễn Thế Đạt">
+                <span class="touch-icon">🌐</span>
+                <span>Facebook Cá Nhân</span>
+              </a>
+            </div>
+
+            <div class="contact-sweet-note">
+              <span class="cam-icon">📸</span>
+              <span>Đạt đã chuẩn bị sẵn hoa, bằng khen và góc chụp ảnh siêu đẹp để chúng mình lưu giữ kỷ niệm cùng nhau!</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer chân trang -->
+        <footer class="graduation-site-footer">
+          <p>© 2026 • Lễ Tốt Nghiệp Tân Kỹ Sư Nguyễn Thế Đạt • HUBT Khóa 27</p>
+          <small>Designed with passion & memories • See you on 16/10/2026</small>
+        </footer>
+
+      </div>
+    </section>
+
+  
+    <!-- =========================================================================
+         LỚP PHỦ YÊU CẦU XOAY NGANG MÀN HÌNH Ở CHẶNG CUỐI (LANDSCAPE ROTATE PROMPT)
+         ========================================================================= -->
+    <div id="landscape-rotate-prompt" class="landscape-rotate-prompt" style="display: none;" role="dialog" aria-modal="true" aria-label="Yêu cầu xoay ngang màn hình">
+      <div class="rotate-prompt-backdrop"></div>
+      <div class="rotate-prompt-card">
+        <div class="rotate-decor-leaves" aria-hidden="true">🍂 🍁 🌾</div>
+        
+        <!-- Hoạt ảnh chiếc điện thoại xoay ngang 3D -->
+        <div class="phone-rotate-anim-wrap" aria-hidden="true">
+          <div class="anim-phone-body">
+            <div class="anim-phone-screen">
+              <span class="screen-desk-mini">🌿🎓📖</span>
+            </div>
+          </div>
+          <div class="anim-rotate-arrow">
+            <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#fcd34d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M42 24c0 9.94-8.06 18-18 18S6 33.94 6 24 14.06 6 24 6c5.52 0 10.45 2.5 13.73 6.44"/>
+              <polyline points="42 6 42 16 32 16"/>
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="rotate-prompt-title">Vui Lòng Xoay Ngang Màn Hình 🔄</h2>
+        <p class="rotate-prompt-desc">
+          Thiệp mời tốt nghiệp được thiết kế chuẩn khung hình ngang điện ảnh. Cậu hãy <strong>xoay ngang điện thoại</strong> để mở thiệp và thưởng thức trọn vẹn nhé! ✨
+        </p>
+        <div class="rotate-prompt-subtip">
+          <span class="subtip-icon">💡</span>
+          <span>Màn hình sẽ tự động mở ra ngay khi cậu xoay ngang máy</span>
+        </div>
+
+        <!-- Nút phụ cho phép tiếp tục xem dọc nếu không muốn xoay -->
+        <button id="btn-dismiss-rotate-prompt" class="btn-dismiss-rotate" type="button">
+          Tiếp tục xem ở màn hình dọc ❯
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+      </div><!-- /#device-phone-shell -->
+
+  <script src="./script.js?v=20261006_clean_ending_wishes_v15"></script>
+</body>
+</html>

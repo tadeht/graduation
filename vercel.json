@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/wishes", "destination": "/api/wishes.py" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ]
+}
