@@ -1233,7 +1233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lobbyDesk) {
       lobbyDesk.classList.remove('hidden-stage');
       lobbyDesk.classList.add('desk-explorer-active');
-      lobbyDesk.style.display = 'block';
+      lobbyDesk.style.removeProperty('display');
       lobbyDesk.style.opacity = '1';
       lobbyDesk.style.pointerEvents = 'auto';
     }
@@ -1265,7 +1265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. Bật thanh Dock khám phá nhanh trên điện thoại (Mobile Quick Explorer Dock)
     const mobileDock = document.getElementById('mobile-quick-dock');
     if (mobileDock) {
-      mobileDock.style.display = 'flex';
+      mobileDock.style.removeProperty('display');
       mobileDock.style.opacity = '1';
     }
 
@@ -1293,7 +1293,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.isDeskExplorerActive && !state.hasInteractedDeskItem) {
           deskHintMsg.classList.add('visible');
         }
-      }, 4000);
+      }, 1000);
     }
 
   }
