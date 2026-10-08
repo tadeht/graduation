@@ -1352,6 +1352,9 @@ document.addEventListener('DOMContentLoaded', () => {
     openDeskDetailModal = function(itemKey) {
       if (!modalDetail || !modalBody) return;
       playOpenChime();
+      state.hasInteractedDeskItem = true;
+      const deskHintMsg = document.getElementById('desk-explorer-hint-msg');
+      if (deskHintMsg) deskHintMsg.classList.remove('visible');
 
       const guestName = state.guestName || 'Bạn';
 
