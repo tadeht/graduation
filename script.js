@@ -908,7 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
       activateDeskExplorerMode(status);
       const audioContainer = document.getElementById('audio-control-container');
       if (audioContainer) {
-        audioContainer.style.display = 'flex';
+        audioContainer.style.display = 'none';
       }
 
       if (rsvpBanner && rsvpStatusText && rsvpStatusSub) {
@@ -1260,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Bật nút điều khiển nhạc
     const audioContainer = document.getElementById('audio-control-container');
-    if (audioContainer) audioContainer.style.display = 'flex';
+    if (audioContainer) audioContainer.style.display = 'none';
 
     // 8. Bật thanh Dock khám phá nhanh trên điện thoại (Mobile Quick Explorer Dock)
     const mobileDock = document.getElementById('mobile-quick-dock');
@@ -1288,12 +1288,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gợi ý hướng dẫn chặng cuối xuất hiện sau nhịp 4 giây dưới khu vực chúc
     const deskHintMsg = document.getElementById('desk-explorer-hint-msg');
-    if (deskHintMsg && !state.hasInteractedDeskItem) {
-      setTimeout(() => {
-        if (state.isDeskExplorerActive && !state.hasInteractedDeskItem) {
-          deskHintMsg.classList.add('visible');
-        }
-      }, 1000);
+    if (deskHintMsg) {
+      deskHintMsg.classList.add('visible');
     }
 
   }
@@ -1352,9 +1348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openDeskDetailModal = function(itemKey) {
       if (!modalDetail || !modalBody) return;
       playOpenChime();
-      state.hasInteractedDeskItem = true;
-      const deskHintMsg = document.getElementById('desk-explorer-hint-msg');
-      if (deskHintMsg) deskHintMsg.classList.remove('visible');
+      // Keep hint permanently on desk rim
 
       const guestName = state.guestName || 'Bạn';
 

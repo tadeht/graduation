@@ -7467,7 +7467,10 @@ body.desk-explorer-mode-active .wishes-marquee-bar,
 }
 
 #desk-explorer-hint-msg.visible,
+body.desk-explorer-mode-active #desk-explorer-hint-msg,
+.lobby-desk-stage.desk-explorer-active #desk-explorer-hint-msg,
 .desk-explorer-hint-msg.visible {
+  display: flex !important;
   opacity: 1 !important;
   visibility: visible !important;
   animation: explorerHintBreathe 4s ease-in-out infinite alternate !important;
@@ -7555,11 +7558,7 @@ body:has(.rsvp-modal-overlay.active) .desk-explorer-hint-msg {
     font-size: 11px !important;
   }
 
-  /* ? mn hnh d?c, khng hi?n hint trn bn d? trnh r?i m?t v d c Dock hu?ng d?n bn du?i */
-  #desk-explorer-hint-msg,
-  .desk-explorer-hint-msg {
-    display: none !important;
-  }
+  /* Hint luon hien thi dep mat o moi man hinh */
 
   /* Ở màn hình dọc, hiện Dock 5 nút bấm để thao tác siêu nhanh */
   .lobby-desk-stage.desk-explorer-active #mobile-quick-dock,
@@ -9871,4 +9870,15 @@ body:has(.rsvp-modal-overlay.active) .desk-explorer-hint-msg {
   .rsvp-modal-card .choice-emoticon {
     font-size: 0.95rem !important;
   }
+}
+
+/* BỎ NÚT NHẠC ĐĨA THAN THEO YÊU CẦU CỦA USER */
+#audio-control-container,
+.audio-control-container,
+#music-toggle-btn,
+.vinyl-record-btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
