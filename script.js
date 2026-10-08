@@ -1930,6 +1930,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fallback khi chạy tĩnh trên public host
       }
 
+      // 1b. Dự phòng: Nếu /api/wishes không khả dụng, gọi trực tiếp Google Apps Script
+      if (this.apiUrl) {
+        try {
+          const res = await fetch(this.apiUrl);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              this.wishes = data;
+              return;
+            }
+          }
+        } catch (err) {}
+      }
+
       // 2. Fallback đọc file tĩnh wishes.json
       try {
         const res = await fetch('./wishes.json');
@@ -1976,6 +1990,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       // 1. Gửi lên server API database
+      let sentToBackend = false;
       try {
         const res = await fetch('/api/wishes', {
           method: 'POST',
@@ -1983,12 +1998,25 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(newWish)
         });
         if (res.ok) {
+          sentToBackend = true;
           const saved = await res.json();
           newWish.id = saved.id || newWish.id;
           newWish.timestamp = saved.timestamp || newWish.timestamp;
         }
       } catch (e) {
         console.log('Lưu cục bộ vào browser');
+      }
+
+      // 1b. Dự phòng nếu Vercel /api/wishes không nhận, gửi thẳng tới Google Apps Script (no-cors)
+      if (!sentToBackend && this.apiUrl) {
+        try {
+          fetch(this.apiUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(newWish)
+          }).catch(() => {});
+        } catch (err) {}
       }
 
       // 2. Lưu vào localStorage để người dùng tải lại vẫn thấy lời chúc của mình
