@@ -1890,6 +1890,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const WishesDB = {
     wishes: [],
+    apiUrl: 'https://script.google.com/macros/s/AKfycbx6OaR2VetLlJ5vR526kIh6f2bRCXGiBInnOys2U4MQB_YMF79bAT9XvCSDdCYHVHRKhA/exec',
 
     formatTime(isoString) {
       if (!isoString) return 'Vừa xong';
